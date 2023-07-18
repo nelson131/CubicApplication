@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+}
+
+group = 'me.nelson131.ca'
+version = '1.0.0'
+
+repositories {
+    mavenCentral()
+    maven { url = uri("https://repo.papermc.io/repository/maven-public/") }
+    maven { url 'https://nexus.scarsz.me/content/groups/public/' }
+    maven { url 'https://m2.dv8tion.net/releases/' }
+}
+
+dependencies {
+    compileOnly 'org.projectlombok:lombok:1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    compileOnly 'com.discordsrv:discordsrv:1.26.0'
+    compileOnly("io.papermc.paper:paper-api:1.19.2-R0.1-SNAPSHOT")
+    implementation("net.dv8tion:JDA:5.0.0-alpha.17")
+}
+
+test {
+    useJUnitPlatform()
+}
+
+shadowJar{
+    relocate 'net.dv8tion', 'me.nelson131.ca'
+}
