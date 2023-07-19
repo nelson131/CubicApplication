@@ -30,4 +30,9 @@ public class MySQL {
             throw new RuntimeException(e);
         }
     }
+
+    public static void addData(Long userId, Long messageId, String name) throws SQLException{
+        String query = "INSERT INTO users (userID, messageID, name) VALUES (" + userId + ", " + messageId + ", '" + name + "');";
+        statement.executeUpdate(query);
+    }
 }
