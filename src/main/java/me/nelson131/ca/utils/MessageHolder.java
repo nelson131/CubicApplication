@@ -4,6 +4,8 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.MessageEmbed;
 
 import java.awt.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import static me.nelson131.ca.utils.Config.getCFG;
 
@@ -30,6 +32,14 @@ public class MessageHolder {
         return ed.build();
     }
 
+    public static MessageEmbed privateMessage(){
+        EmbedBuilder ed = new EmbedBuilder();
+        ed.setColor(main);
+        ed.setTitle(getCFG("private-title"));
+        ed.setDescription(getCFG("private-desc"));
+        return ed.build();
+    }
+
     public static MessageEmbed openRequestMessage(String nickname, String byWhere, String rulesAccepted, String plans, String reg, String mention){
         EmbedBuilder ed = new EmbedBuilder();
         ed.setColor(main);
@@ -40,6 +50,25 @@ public class MessageHolder {
         ed.addField(getCFG("req-plans"), plans, false);
         ed.addField(getCFG("req-reg"), reg, false);
         ed.setFooter(getCFG("req-id") + " " + mention);
+        return ed.build();
+    }
+
+    public static MessageEmbed archiveMessage(String nickname, Long id){
+        EmbedBuilder ed = new EmbedBuilder();
+        DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime time = LocalDateTime.now();
+        ed.setColor(main);
+        ed.setTitle(getCFG("arc-title"));
+        ed.addField(getCFG("arc-nickname-title"), nickname, false);
+        ed.addField(getCFG("arc-id-title"), String.valueOf(id), false);
+        ed.addField(getCFG("arc-date"), date.format(time), false);
+        return ed.build();
+    }
+
+    public static MessageEmbed alreadyRoleMessage(){
+        EmbedBuilder ed = new EmbedBuilder();
+        ed.setColor(error);
+        ed.setTitle(getCFG("already-role"));
         return ed.build();
     }
 }

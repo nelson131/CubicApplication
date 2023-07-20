@@ -35,4 +35,24 @@ public class MySQL {
         String query = "INSERT INTO users (userID, messageID, name) VALUES (" + userId + ", " + messageId + ", '" + name + "');";
         statement.executeUpdate(query);
     }
+
+    public static void removeData(Long userId) throws SQLException{
+        String query = "DELETE FROM users WHERE userID = " + userId + ";";
+        statement.executeUpdate(query);
+    }
+
+    public static Long getUserId(Long messageId) throws SQLException{
+        String query = "SELECT userID FROM users WHERE messageID = " + messageId + ";";
+        resultSet = statement.executeQuery(query);
+        if(resultSet.next()) return resultSet.getLong("userID");
+        return 0L;
+    }
+
+    public static String getNickname(Long messageId) throws SQLException{
+        String query = "SELECT name FROM users WHERE messageId = " + messageId + ";";
+        resultSet = statement.executeQuery(query);
+        if(resultSet.next()) return resultSet.getString("name");
+        return "";
+    }
+
 }

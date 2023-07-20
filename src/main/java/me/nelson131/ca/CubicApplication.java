@@ -2,6 +2,7 @@ package me.nelson131.ca;
 
 import lombok.SneakyThrows;
 import me.nelson131.ca.discord.ApplicationCommand;
+import me.nelson131.ca.discord.buttons.AcceptButton;
 import me.nelson131.ca.discord.buttons.CreateButton;
 import me.nelson131.ca.discord.modals.CreateModal;
 import net.dv8tion.jda.api.JDA;
@@ -37,7 +38,7 @@ public class CubicApplication extends JavaPlugin {
         jda = JDABuilder.createDefault(getCFG("bot-token"))
                 .setActivity(Activity.watching(getCFG("activity-watching")))
                 .enableIntents(GatewayIntent.MESSAGE_CONTENT)
-                .addEventListeners(new ApplicationCommand(), new CreateButton(), new CreateModal())
+                .addEventListeners(new ApplicationCommand(), new CreateButton(), new CreateModal(), new AcceptButton())
                 .build();
 
     }

@@ -13,7 +13,7 @@ public class ApplicationCommand extends ListenerAdapter {
     @Override
     public void onMessageReceived(MessageReceivedEvent event){
         String message = event.getMessage().getContentRaw();
-        if(message.equals("application")){
+        if(message.equals("!application")){
             Button button = Button.success("app", getCFG("button-app"));
 
             event.getChannel().sendMessageEmbeds(applicationMessage())

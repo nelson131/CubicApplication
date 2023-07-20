@@ -6,6 +6,7 @@ import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
 import java.sql.SQLException;
 
@@ -33,15 +34,23 @@ public class CreateModal extends ListenerAdapter {
 
             TextChannel textChannel = guild.getTextChannelById(getCFG("staff-channel-id"));
 
-            textChannel.sendMessageEmbeds(openRequestMessage(nickname, byWhere, rulesAccepted, plans, reg, userMention)).queue();
-            Long messageId = textChannel.getLatestMessageIdLong();
-            event.replyEmbeds(directMessage()).setEphemeral(true).queue();
+            Button accept = Button.success("accept", getCFG("button-accept"));
+            Button cancel = Button.primary("cancel", getCFG("button-cancel"));
+            Button delete = Button.danger("delete", getCFG("button-delete"));
+
+            Message message = textChannel.sendMessageEmbeds(openRequestMessage(nickname, byWhere, rulesAccepted, plans, reg, userMention))
+                    .addActionRow(accept)
+                    .addActionRow(cancel)
+                    .addActionRow(delete)
+                    .complete();
 
             try {
-                addData(userId, messageId, nickname);
+                addData(userId, message.getIdLong(), nickname);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
+            event.replyEmbeds(directMessage()).setEphemeral(true).queue();
 
         }
     }
