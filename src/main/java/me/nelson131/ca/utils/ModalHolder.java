@@ -37,10 +37,19 @@ public class ModalHolder {
                 .setRequired(true)
                 .build();
 
-        Modal modal = Modal.create("create", getCFG("create-title"))
+        return Modal.create("create", getCFG("create-title"))
                 .addActionRows(ActionRow.of(nickname), ActionRow.of(byWhere), ActionRow.of(rulesAccepted), ActionRow.of(plans), ActionRow.of(registration))
                 .build();
+    }
 
-        return modal;
+    public static Modal cancelModal(){
+        TextInput reason = TextInput.create("reason", getCFG("cancel-reason"), TextInputStyle.PARAGRAPH)
+                .setPlaceholder(getCFG("cancel-reason-pl"))
+                .setRequired(true)
+                .build();
+
+        return Modal.create("cancel", getCFG("cancel-title"))
+                .addActionRow(reason)
+                .build();
     }
 }

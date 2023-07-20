@@ -71,4 +71,16 @@ public class MessageHolder {
         ed.setTitle(getCFG("already-role"));
         return ed.build();
     }
+
+    public static MessageEmbed reasonMessage(String reason, String author){
+        EmbedBuilder ed = new EmbedBuilder();
+        DateTimeFormatter date = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        LocalDateTime time = LocalDateTime.now();
+        ed.setColor(error);
+        ed.setTitle(getCFG("reason-title"));
+        ed.addField(getCFG("reason-field"), reason, true);
+        ed.setDescription(getCFG("reason-desc") + " " + author);
+        ed.setFooter(getCFG("reason-footer") + " " + date.format(time));
+        return ed.build();
+    }
 }
