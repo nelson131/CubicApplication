@@ -1,4 +1,4 @@
-package me.nelson131.ca.discord.buttons;
+package me.nelson131.ca.discord.buttons.functions;
 
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;

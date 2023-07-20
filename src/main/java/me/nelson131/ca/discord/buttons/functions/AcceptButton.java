@@ -1,4 +1,4 @@
-package me.nelson131.ca.discord.buttons;
+package me.nelson131.ca.discord.buttons.functions;
 
 import me.nelson131.ca.CubicApplication;
 import net.dv8tion.jda.api.JDA;
