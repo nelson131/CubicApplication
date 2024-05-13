@@ -18,9 +18,9 @@ import static me.nelson131.ca.utils.MessageHolder.openRequestMessage;
 public class CreateModal extends ListenerAdapter {
 
     @Override
-    public void onModalInteraction(ModalInteractionEvent event){
+    public void onModalInteraction(ModalInteractionEvent event) {
 
-        if(event.getModalId().equals("create")){
+        if (event.getModalId().equals("create")) {
             Guild guild = event.getGuild();
 
             String nickname = event.getValue("nickname").getAsString();
@@ -38,17 +38,17 @@ public class CreateModal extends ListenerAdapter {
             Button cancel = Button.primary("cancel", getCFG("button-cancel"));
             Button delete = Button.danger("delete", getCFG("button-delete"));
 
-            Message message = textChannel.sendMessageEmbeds(openRequestMessage(nickname, byWhere, rulesAccepted, plans, reg, userMention))
+            textChannel.sendMessageEmbeds(openRequestMessage(nickname, byWhere, rulesAccepted, plans, reg, userMention))
                     .addActionRow(accept)
                     .addActionRow(cancel)
                     .addActionRow(delete)
-                    .complete();
-
-            try {
-                addData(userId, message.getIdLong(), nickname);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+                    .queue(message -> {
+                        try {
+                            addData(userId, message.getIdLong(), nickname);
+                        } catch (SQLException e) {
+                            throw new RuntimeException(e);
+                        }
+                    });
 
             event.replyEmbeds(directMessage()).setEphemeral(true).queue();
 

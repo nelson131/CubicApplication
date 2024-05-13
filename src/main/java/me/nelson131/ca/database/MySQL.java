@@ -24,8 +24,6 @@ public class MySQL {
                     "messageID LONG, " +
                     "name VARCHAR(30));");
 
-            System.out.println("sql table init");
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
