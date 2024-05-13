@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import static me.nelson131.ca.database.MySQL.getUserId;
 import static me.nelson131.ca.database.MySQL.removeData;
 import static me.nelson131.ca.utils.Config.getCFG;
-import static me.nelson131.ca.utils.MessageHolder.privateMessage;
 import static me.nelson131.ca.utils.MessageHolder.reasonMessage;
 
 public class CancelModal extends ListenerAdapter {
